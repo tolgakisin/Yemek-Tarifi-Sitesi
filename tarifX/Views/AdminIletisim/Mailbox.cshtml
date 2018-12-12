@@ -1,0 +1,80 @@
+﻿@model IEnumerable<tarifX.Models.Contact>
+@{
+    ViewBag.Title = "Mailbox";
+    Layout = "~/Views/Shared/_adminView.cshtml";
+}
+
+<h2>Mailbox</h2>
+<section class="content">
+    <div class="row">
+
+        <!-- /.col -->
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Inbox</h3>
+                    <div class="box-tools pull-right">
+                        <div class="has-feedback">
+                            <input type="text" class="form-control input-sm" placeholder="Search Mail">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+
+                    @{Html.BeginForm("BatchDelete", "AdminIletisim", FormMethod.Post, new { name = "tableForm" });}
+
+                    <div class="table-responsive mailbox-messages">
+                        <table class="table table-hover table-striped">
+                            <tbody>
+                                @foreach (var item in Model) {
+                                    <tr>
+                                        <td><input type="checkbox" name="deleteInputs" value="@item.ID"></td>
+                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
+                                        <td class="mailbox-name">@Html.ActionLink(item.Name, "ReadMail", new { id = item.ID })</td>
+                                        <td class="mailbox-subject">
+                                            <b>AdminLTE 2.0 Issue</b>
+                                            @*@item.Message.Substring(0,item.Message.Length>25 ? 25  : item.Message.Length)*@
+
+                                            @if (item.Message.Length > 25) {@Html.Raw(item.Message.Substring(0, 25) + "...")} else { @Html.Raw(item.Message)}
+                                        </td>
+                                        <td class="mailbox-attachment"></td>
+                                        <td class="mailbox-date">@item.CreatedDate</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- /.table -->
+                    </div>
+                    <!-- /.mail-box-messages -->
+
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer no-padding">
+                    <div class="mailbox-controls">
+                        <!-- Check all button -->
+                        <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        <!-- Section for buttons -->
+                        @*<div class="actions">
+                                <a href="javascript:(function(){document.tableForm.submit();return void(0);})()">
+                                    Delete selected books
+                                </a>
+                            </div>*@
+                        <!-- /.btn-group -->
+                        @*refresh button*@
+                        <a href="javascript:(window.onbeforeunload = function() { location.reload(); })()" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></a>
+
+                        
+                        <!-- /.pull-right -->
+                    </div>
+                </div>
+                @{ Html.EndForm();}
+            </div>
+            <!-- /. box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>

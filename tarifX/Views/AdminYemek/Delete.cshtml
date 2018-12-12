@@ -1,0 +1,35 @@
+﻿@model tarifX.Models.Food
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_adminView.cshtml";
+}
+<br />
+<h2>Delete</h2>
+<br />
+
+<h3>@Html.DisplayFor(model=>model.PublishedBy) tarafından oluşturulan tarifi silmek istiyor musunuz?</h3>
+<div>
+    <h4>Yemek Tarifi</h4>
+    <hr />
+
+
+    TARİF İSMİ = <b>@Html.DisplayFor(model => model.Title)</b>
+
+    @*<dt>
+            @Html.DisplayFor(model=>model.PublishedBy)
+
+        </dt>
+        <dt>
+            @Html.Raw(Model.Content)
+        </dt>*@
+
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Listeye Geri Dön", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,74 @@
+﻿@model tarifX.Models.Contact
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_homeView.cshtml";
+}
+
+<div class="container contact-special">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <p style="font-size: 20px;font-family: Lora,Times New Roman,serif">Bizimle iletişime mi geçmek istiyorsunuz? En kısa sürede mailinizi cevaplayacağız.</p>
+            <br>
+
+            @if (TempData["Success"] != null) {
+                <div class="alert alert-success">
+                    <strong>Başarılı!</strong> @TempData["Success"]
+                </div>
+            }
+
+            @*<p class="text-success">@TempData["Success"]</p>*@
+
+            @using (Html.BeginForm("Contact", "Contact", FormMethod.Post)) {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+
+
+
+                <fieldset>
+
+                    <div class="form-group">
+                        <div class="">
+                            <div class="">
+                                @Html.LabelFor(model => model.Name, "Name *", new { @class = "control-label" })
+
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.EmailAddress, "Email Address *", new { @class = "control-label" })
+
+                        @Html.TextBoxFor(model => model.EmailAddress, new { @type = "email", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.Message, "Message *", new { @class = "control-label" })
+
+                        @Html.TextAreaFor(model => model.Message, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LdpVnUUAAAAAMRoe_ePchYLjbbjJqKOILwdeJsP"></div>
+                    </div>
+                    <p class="text-danger">@TempData["message"]</p>
+
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Gönder</button>
+                    </div>
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>
+
+

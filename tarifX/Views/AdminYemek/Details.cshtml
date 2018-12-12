@@ -1,0 +1,39 @@
+﻿@model tarifX.Models.Food
+@using System.Text.RegularExpressions;
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_adminView.cshtml";
+}
+
+<br />
+<h2>Details</h2>
+<br />
+
+<div class="row">
+
+
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+
+        <h3> @Model.Title <small>@Model.PublishingDate</small> </h3> Hazırlayan : <b>@Model.PublishedBy</b>
+        @if (!Model.Photo.IsEmpty()) {
+            <img class="img-responsive" src="~/Uploads/RecipePhoto/@Model.Photo" alt="@Model.Title" />
+            <br />
+        }
+
+        @Html.Raw("Kaç Kişilik : " + Model.NumberOfPeople)
+        <br />
+        @Html.Raw("Hazırlanma Süresi : " + Model.PreparationTime + " Dakika")
+        <br />
+        @Html.Raw("Pişirme Süresi : " + Model.CookingTime + " Dakika")
+        <br />
+        @Html.Raw("Malzemeler : " + Model.Materials)
+        <br />
+        @Html.Raw("Yapılışı : " + Model.Content)
+
+
+
+
+    </div>
+
+</div>

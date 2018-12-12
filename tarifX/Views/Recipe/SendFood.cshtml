@@ -1,0 +1,130 @@
+﻿@model tarifX.Models.FoodFromPeople
+    @{
+        ViewBag.Title = "SendFood";
+        Layout = "~/Views/Shared/_homeView.cshtml";
+    }
+
+
+    <br />
+    <div class="container">
+        @using (Html.BeginForm("SendFood", "Recipe", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            if (TempData["Success"] != null) {
+                <div class="alert alert-success">
+                    <strong>@TempData["Success"]</strong>
+                </div>
+            }
+            if (TempData["Fail"] != null) {
+                <div class="alert alert-danger">
+                    <strong>@TempData["Fail"]</strong>
+                </div>
+            }
+
+                <fieldset>
+                    <legend>Yemek Tarifi Gönder</legend>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PublishedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.PublishedBy)
+                            @Html.ValidationMessageFor(model => model.PublishedBy)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.Title)
+                            @Html.ValidationMessageFor(model => model.Title)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CategoryID, "CategoryList", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.CategoryID, (SelectList)ViewBag.CategoryList, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-2" })
+                        <div class="col-md-7">
+                            @Html.TextAreaFor(model => model.Content, new { @id = "editor1" })
+                            <script type="text/javascript">
+                    var editor = CKEDITOR.instances['editor1'];
+                    if(editor){editor.destroy(true);}
+                    CKEDITOR.replace('editor1', {
+                    entermode: CKEDITOR.ENTER_BR,
+                    });
+                    CKFinder.setupCKEditor(null,'@Url.Content("~/ckeditor/ckfinder")');
+                            </script>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Materials, new { @class = "control-label col-md-2" })
+                        <div class="col-md-7">
+                            @Html.TextAreaFor(model => model.Materials, new { @id = "editor2" })
+                            <script type="text/javascript">
+                    var editor = CKEDITOR.instances['editor2'];
+                    if(editor){editor.destroy(true);}
+                    CKEDITOR.replace('editor2', {
+                    entermode: CKEDITOR.ENTER_BR,
+                    });
+                    CKFinder.setupCKEditor(null,'@Url.Content("~/ckeditor/ckfinder")');
+                            </script>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NumberOfPeople, new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.NumberOfPeople)
+                            @Html.ValidationMessageFor(model => model.NumberOfPeople)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PreparationTime, new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.PreparationTime)
+                            @Html.ValidationMessageFor(model => model.PreparationTime)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CookingTime, new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.CookingTime)
+                            @Html.ValidationMessageFor(model => model.CookingTime)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="file" name="Photo" id="Photo" value="" accept=".jpg,.png,.gif,.JPEG,.jpeg" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-block btn-primary btn-lg">Tarif Gönder</button>
+                    </div>
+
+                </fieldset>
+        }
+
+    </div>
+    <br />
+
+    <hr />
+
+    <br />

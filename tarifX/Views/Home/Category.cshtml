@@ -1,0 +1,57 @@
+﻿@model IEnumerable<tarifX.Models.Food>
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_homeView.cshtml";
+}
+
+<!-- Hero section -->
+<section class="page-top-section set-bg" data-setbg="/assets/Home/img/page-top-bg.jpg">
+    <div class="container">
+        <h2>@ViewBag.CategoryName</h2>
+    </div>
+</section>
+<!-- Hero section end -->
+<!-- Search section -->
+
+<!-- Search section end -->
+<!-- Recipes section -->
+<section class="recipes-page spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="section-title">
+                    <h2>Son Yayınlanan Tarifler</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="recipe-view">
+                    <i class="fa fa-bars"></i>
+                    <i class="fa fa-th active"></i>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model) {
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="recipe">
+                        <img src="~/Uploads/RecipePhoto/@item.Photo" height="247" width="330" alt="">
+                        <div class="recipe-info-warp">
+                            <div class="recipe-info">
+                                <a href="/Recipe/Details/@item.ID"><h3>@item.Title</h3></a>
+                                <h4>@item.Category.Name</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+        <div class="site-pagination">
+            <span>01</span>
+            
+        </div>
+    </div>
+</section>
+<!-- Recipes section end -->

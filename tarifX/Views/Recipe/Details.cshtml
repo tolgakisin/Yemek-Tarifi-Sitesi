@@ -1,0 +1,73 @@
+﻿@model tarifX.Models.Food
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_homeView.cshtml";
+}
+
+<!-- Hero section -->
+<section class="page-top-section set-bg" data-setbg="/assets/Home/img/page-top-bg.jpg">
+    <div class="container">
+        <h2>Yemek Tarifi</h2>
+    </div>
+</section>
+<!-- Hero section end -->
+<br />
+<br />
+<!-- Recipe big view -->
+<div class="recipe-view-section">
+    <div class="container">
+        <div style="text-align:center;">
+            <img src="/Uploads/RecipePhoto/@Model.Photo" width="700" alt="@Model.Title" />
+        </div>
+        
+    </div>
+
+</div>
+
+<!-- Recipe details section -->
+<section class="recipe-details-section">
+    <div class="container">
+        <div class="recipe-meta">
+            <div class="racipe-cata">
+                <span>@Model.Category.Name</span>
+            </div>
+            <h2>@Model.Title</h2>
+            <div class="recipe-date">@Model.PublishingDate</div>
+            Hazırlayan : <b>@Model.PublishedBy</b>
+        </div>
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="recipe-filter-warp">
+                    <div class="filter-top">
+                        <div class="filter-top-text">
+                            <p>Hazırlanış Süresi: @Model.PreparationTime dakika</p>
+                            <p>Pişirme Süresi: @Model.CookingTime dakika</p>
+                            <p>Kaç Kişilik: @Model.NumberOfPeople kişilik</p>
+                        </div>
+                    </div>
+                    <!-- recipe filter form -->
+                    <div class="filter-form-warp">
+                        <h2>Malzemeler</h2>
+                        <form class="filter-form">
+                            <div class="check-warp">
+
+                                <label for="one">@Html.Raw(Model.Materials)</label>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <ul class="recipe-info-list">
+
+                    <li>
+
+                        <p>@Html.Raw(Model.Content)</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Recipe details section end -->

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<tarifX.Models.Food>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_homeView.cshtml";
+}
+
+<section class="hero-section">
+    <div class="hero-slider owl-carousel">
+        <div class="hero-slide-item set-bg" data-setbg="/assets/Home/img/slider-bg-1.jpg">
+            <div class="hs-text">
+                <h2 class="hs-title-1"><span>sağlıklı tarifler</span></h2>
+                <h2 class="hs-title-2"><span>en iyi şeflerden</span></h2>
+                <h2 class="hs-title-3"><span>bütün yemekler</span></h2>
+            </div>
+        </div>
+        <div class="hero-slide-item set-bg" data-setbg="/assets/Home/img/slider-bg-2.jpg">
+            <div class="hs-text">
+                <h2 class="hs-title-1"><span>sağlıklı tarifler</span></h2>
+                <h2 class="hs-title-2"><span>en iyi şeflerden</span></h2>
+                <h2 class="hs-title-3"><span>bütün yemekler</span></h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Add section end -->
+<section class="add-section spad">
+    <div class="container">
+        <div class="add-warp">
+            <div class="add-slider owl-carousel">
+                <div class="as-item set-bg" data-setbg="/assets/Home/img/add/1.jpg"></div>
+                <div class="as-item set-bg" data-setbg="/assets/Home/img/add/2.jpg"></div>
+                <div class="as-item set-bg" data-setbg="/assets/Home/img/add/3.jpg"></div>
+            </div>
+            <div class="row add-text-warp">
+                <div class="col-lg-4 col-md-5 offset-lg-8 offset-md-7">
+                    <div class="add-text text-white">
+                        <div class="at-style"></div>
+                        <h2>Birbirinden lezzetli tarifler</h2>
+                        <ul>
+                            <li>Yapımı kolay</li>
+                            <li>Adım adım yapılışı</li>
+                            <li>Glutensiz yemekler</li>
+                            <li>Sağlıklı öğünler</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Add section end -->
+
+<section class="recipes-section spad pt-0">
+    <div class="container">
+        <div class="section-title">
+            <h2>Son Yayınlanan Tarifler</h2>
+        </div>
+        <div class="row">
+            @foreach (var item in Model) {
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="recipe">
+                        <img src="~/Uploads/RecipePhoto/@item.Photo" height="247" width="330" alt="">
+                        <div class="recipe-info-warp">
+                            <div class="recipe-info">
+                                <a href="/Recipe/Details/@item.ID"><h3>@item.Title</h3></a>
+                                <h4><a href="@Url.Action("Category","Home",new { id=item.CategoryID })">@item.Category.Name</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+    </div>
+</section>
+<!-- Recipes section end -->

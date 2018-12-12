@@ -1,0 +1,46 @@
+﻿@model tarifX.Models.Category
+@{
+                /**/
+
+                ViewBag.Title = "Create";
+                Layout = "~/Views/Shared/_adminView.cshtml";
+}
+<br />
+<h2>Kategori Oluştur</h2>
+<br />
+
+@using (Html.BeginForm("Create", "AdminKategori", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            <strong>@TempData["Success"]</strong>
+        </div>
+    }
+    if (TempData["Fail"] != null)
+    {
+        <div class="alert alert-danger">
+            <strong>@TempData["Fail"]</strong>
+        </div>
+    }
+
+    <fieldset>
+        <legend>Kategori</legend>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.Name, new { @class = "col-md-2" })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-block btn-primary btn-lg">Kategori Oluştur</button>
+        </div>
+    </fieldset>
+}

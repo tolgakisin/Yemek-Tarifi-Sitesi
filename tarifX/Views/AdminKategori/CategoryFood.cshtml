@@ -1,0 +1,69 @@
+﻿@model IEnumerable<tarifX.Models.Food>
+@using System.Text.RegularExpressions;
+@{
+    ViewBag.Title = "CategoryFood";
+    Layout = "~/Views/Shared/_adminView.cshtml";
+}
+
+<br />
+<h2>Yemek Tarifleri</h2>
+
+<br />
+
+<h3>Kategori : <b>@ViewBag.CategoryName</b></h3>
+
+<!-- table primary start -->
+<div class="col-lg-12 mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="header-title">Tarifler</h4>
+            <div class="single-table">
+                <div class="table-responsive">
+                    <table class="table text-center">
+                        <thead class="text-uppercase bg-primary">
+                            <tr class="text-white">
+
+                                <th scope="col">Başlık</th>
+                                <th scope="col">Kategori</th>
+                                <th scope="col">İçerik</th>
+                                <th scope="col">Kaç Kişilik</th>
+                                <th scope="col">Hazırlama Süresi</th>
+                                <th scope="col">Pişirme Süresi</th>
+                                <th scope="col">Yazar</th>
+                                <th scope="col">Yayınlanma Tarihi</th>
+                                <th scope="col">Düzenle</th>
+                                <th scope="col">Sil</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><a href="/AdminYemek/Details/@item.ID">@item.Title</a></td>
+                                    <td><a href="#">@Html.DisplayFor(modelItem => item.Category.Name)</a></td>
+                                    <td>
+                                        @if (Regex.Replace(item.Content, "<.*?>", string.Empty).Length > 40)
+                                        {
+                                            <p>@Regex.Replace(item.Content, "<.*?>", string.Empty).Substring(0, 40)<b>...</b></p>}
+                                        else
+                                        { @Html.Raw(item.Content)}
+                                    </td>
+                                    <td>@item.NumberOfPeople</td>
+                                    <td>@item.PreparationTime</td>
+                                    <td>@item.CookingTime</td>
+                                    <td>@item.PublishedBy</td>
+                                    <td>@item.PublishingDate</td>
+                                    <td><a href="/AdminYemek/Edit/@item.ID"><i class="ti-pencil"></i></a></td>
+                                    <td><a href="/AdminYemek/Delete/@item.ID"><i class="ti-trash"></i></a></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- table primary end -->

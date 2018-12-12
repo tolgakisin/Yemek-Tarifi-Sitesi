@@ -1,0 +1,20 @@
+﻿@model tarifX.Models.Category
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_adminView.cshtml";
+}
+<br />
+<h2>Kategori Sil</h2>
+<br />
+
+<h3><b>@Html.DisplayFor(model => model.Name)</b> kategorisini silmek istiyor musunuz?</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Listeye Geri Dön", "Index")
+    </div>
+}

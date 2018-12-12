@@ -1,0 +1,106 @@
+﻿@model tarifX.Models.Food
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_adminView.cshtml";
+}
+
+<br />
+<h2>Düzenle</h2>
+<br />
+
+@using (Html.BeginForm("Edit", "AdminYemek", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @*@Html.HiddenFor(model => Model.ID)*@
+<fieldset>
+    <legend>Yemek Tarifleri</legend>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoryID, "CategoryList", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.DropDownListFor(model => model.CategoryID, (SelectList)ViewBag.CategoryList, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.TextAreaFor(model => model.Content, new { @id = "editor1" })
+            <script type="text/javascript">
+                    var editor = CKEDITOR.instances['editor1'];
+                    if(editor){editor.destroy(true);}
+                    CKEDITOR.replace('editor1', {
+                    entermode: CKEDITOR.ENTER_BR,
+                    });
+                    CKFinder.setupCKEditor(null,'@Url.Content("~/ckeditor/ckfinder")');
+            </script>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Materials, new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.TextAreaFor(model => model.Materials, new { @id = "editor2" })
+            <script type="text/javascript">
+                    var editor = CKEDITOR.instances['editor2'];
+                    if(editor){editor.destroy(true);}
+                    CKEDITOR.replace('editor2', {
+                    entermode: CKEDITOR.ENTER_BR,
+                    });
+                    CKFinder.setupCKEditor(null,'@Url.Content("~/ckeditor/ckfinder")');
+            </script>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumberOfPeople, new { @class = "control-label col-md-2" })
+
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.NumberOfPeople)
+            @Html.ValidationMessageFor(model => model.NumberOfPeople)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PreparationTime, new { @class = "control-label col-md-2" })
+
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.PreparationTime)
+            @Html.ValidationMessageFor(model => model.PreparationTime)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CookingTime, new { @class = "control-label col-md-2" })
+
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.CookingTime)
+            @Html.ValidationMessageFor(model => model.CookingTime)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            <input type="file" name="Photo" id="Photo" value="" accept=".jpg,.png,.gif,.JPEG,.jpeg" class="form-control" />
+            @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-md-1">
+        <button type="submit" class="btn btn-block btn-primary btn-lg">Düzenle</button>
+    </div>
+
+</fieldset>
+}
+
